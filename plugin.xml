@@ -1,0 +1,109 @@
+<?xml version='1.0' encoding='utf-8'?>
+<plugin id="tff-plugin-cmb"
+        version="0.1.0"
+        xmlns="http://apache.org/cordova/ns/plugins/1.0"
+        xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <name>TffCMB</name>
+
+    <engines>
+        <engine name="cordova" version=">=3.5.0"/>
+    </engines>
+
+    <js-module name="TffCMB" src="www/tffcmb.js">
+        <clobbers target="TffCMB" />
+    </js-module>
+
+    <preference name="PRIVATE_KEY"/>
+
+    <platform name="android">
+        <config-file target="res/xml/config.xml" parent="/*">
+            <feature name="TffCMB" >
+                <param name="android-package" value="org.apache.cordova.tffcmb.TffCMB"/>
+            </feature>
+        </config-file>
+
+        <config-file target="AndroidManifest.xml" parent="/manifest/application">
+            <service android:name="cmb.pb.cmbsafe.CmbService" android:exported="false"></service>        
+            <activity
+                android:name="cmb.pb.ui.PBKeyboardActivity"
+                android:theme="@style/CmbDialogStyleBottom" >
+            </activity>
+            <activity
+                android:name="org.apache.cordova.tffcmb.TffCMBActivity"
+                android:theme="@android:style/Theme.Black.NoTitleBar">
+            </activity>
+        </config-file>
+
+        <source-file src="src/android/TffCMB.java" target-dir="src/org/apache/cordova/tffcmb" />
+        <source-file src="src/android/TffCMBActivity.java" target-dir="src/org/apache/cordova/tffcmb" />
+        <source-file src="src/android/libs/cmbkeyboard.jar" target-dir="libs"/>
+
+        <source-file src="src/android/res/drawable/cmbkb_backspace_dark_icon.png" target-dir="res/drawable"/>
+        <source-file src="src/android/res/drawable/cmbkb_backspace_icon.png" target-dir="res/drawable"/>
+        <source-file src="src/android/res/drawable/cmbkb_bg.9.png" target-dir="res/drawable"/>
+        <source-file src="src/android/res/drawable/cmbkb_btn_normal.9.png" target-dir="res/drawable"/>
+        <source-file src="src/android/res/drawable/cmbkb_btn_pressed.9.png" target-dir="res/drawable"/>
+        <source-file src="src/android/res/drawable/cmbkb_key_delete_normal.png" target-dir="res/drawable"/>
+        <source-file src="src/android/res/drawable/cmbkb_logo.png" target-dir="res/drawable"/>
+        <source-file src="src/android/res/drawable/cmbkb_shift_actived.png" target-dir="res/drawable"/>
+        <source-file src="src/android/res/drawable/cmbkb_shift_dark_normal.png" target-dir="res/drawable"/>
+        <source-file src="src/android/res/drawable/cmbkb_shift_normal.png" target-dir="res/drawable"/>
+        <source-file src="src/android/res/drawable/cmbkb_space.png" target-dir="res/drawable"/>
+        <source-file src="src/android/res/drawable/cmbkb_space_dark.png" target-dir="res/drawable"/>
+        <source-file src="src/android/res/drawable/cmbkb_sym_keyboard_space.png" target-dir="res/drawable"/>
+        <source-file src="src/android/res/drawable/cmbkb_btn_keyboard_key.xml" target-dir="res/drawable"/>
+        <source-file src="src/android/res/drawable/pb.xml" target-dir="res/drawable"/>
+        <source-file src="src/android/res/drawable/tff_back_left.png" target-dir="res/drawable"/>
+        
+        <source-file src="src/android/res/drawable-hdpi/cmbkb_emotionstore_progresscancelbtn.png" target-dir="res/drawable-hdpi"/>
+        <source-file src="src/android/res/drawable-hdpi/cmbkb_list_separator.png" target-dir="res/drawable-hdpi"/>
+        
+        <source-file src="src/android/res/layout/cmbkeyboard.xml" target-dir="res/layout"/>    
+        <source-file src="src/android/res/layout/activity_tff_cmb.xml" target-dir="res/layout"/>
+
+        <source-file src="src/android/res/values/cmbkb_attrs.xml" target-dir="res/values"/>    
+        <source-file src="src/android/res/values/cmbkb_colors.xml" target-dir="res/values"/>    
+        <source-file src="src/android/res/values/cmbkb_dimens.xml" target-dir="res/values"/>    
+        <source-file src="src/android/res/values/cmbkb_strings.xml" target-dir="res/values"/>    
+        <source-file src="src/android/res/values/cmbkb_styles.xml" target-dir="res/values"/>    
+
+        <source-file src="src/android/res/values-zh/cmbkb_strings.xml" target-dir="res/values-zh"/>   
+
+        <source-file src="src/android/res/xml/cmbkb_number.xml" target-dir="res/xml"/>    
+        <source-file src="src/android/res/xml/cmbkb_number_symbols.xml" target-dir="res/xml"/>    
+        <source-file src="src/android/res/xml/cmbkb_number_with_change.xml" target-dir="res/xml"/>    
+        <source-file src="src/android/res/xml/cmbkb_number_with_dot.xml" target-dir="res/xml"/>    
+        <source-file src="src/android/res/xml/cmbkb_number_with_x.xml" target-dir="res/xml"/>    
+        <source-file src="src/android/res/xml/cmbkb_qwerty.xml" target-dir="res/xml"/>    
+        <source-file src="src/android/res/xml/cmbkb_symbols.xml" target-dir="res/xml"/>    
+    
+        <source-file src="src/android/res/anim/cmbkb_push_bottom_in.xml" target-dir="res/anim"/>    
+        <source-file src="src/android/res/anim/cmbkb_push_bottom_out.xml" target-dir="res/anim"/>    
+
+    </platform>
+
+    <platform name="ios">
+        <config-file target="config.xml" parent="/widget">
+            <feature name="TffCMB">
+                <param name="ios-package" value="TffCMBPlugin" />
+                <param name="onload" value="true" />
+            </feature>
+        </config-file>
+
+        <config-file target="*-Info.plist" parent="CMBPublicKey">
+            <string>$PRIVATE_KEY</string>
+        </config-file>
+
+        <framework src="src/ios/lib/cmbkeyboard.framework" custom="true" />
+
+        <header-file src="src/ios/TffCMBPlugin.h" />
+	    <source-file src="src/ios/TffCMBPlugin.m" />
+	    <header-file src="src/ios/TffCMBViewController.h" />
+	    <source-file src="src/ios/TffCMBViewController.m" />
+
+        <resource-file src="src/ios/SecreteKeyBoard"/>
+
+    </platform>
+
+</plugin>
