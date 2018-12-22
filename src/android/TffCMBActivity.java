@@ -17,7 +17,6 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 
 
-import org.apache.http.util.EncodingUtils;
 
 import cmb.pb.util.CMBKeyboardFunc;
 //import cn.uetec.charger.R;
@@ -142,7 +141,8 @@ public class TffCMBActivity extends Activity implements View.OnClickListener {
         }
 
         String a = "jsonRequestData=" + jsonRequestData;
-        webView.postUrl(url, EncodingUtils.getBytes(a,"base64"));
+//        webView.postUrl(url, EncodingUtils.getBytes(a,"base64"));
+        webView.postUrl(url, a.getBytes());
 
 
     }
